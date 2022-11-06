@@ -45,22 +45,24 @@ spec:
       input:
         namespaced: true
         manifest: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
+          apiVersion: apps/v1
+          kind: Deployment
           metadata:
-            name: deploy
+            name: hello-world
             namespace: heroku
           spec:
-            destination:
-              namespace: ${{ parameters.serviceName }}
-              server: https://kubernetes.default.svc
-            project: default
-            source:
-              chart: ${{ (parameters.repoUrl | parseRepoUrl).repo }}
-              repoURL: ghcr.io/${{ (parameters.repoUrl | parseRepoUrl).owner }}
-              targetRevision: 9.9.9
-            syncPolicy:
-              automated:
-                selfHeal: true
-              syncOptions:
-                - CreateNamespace=true
+            replicas: 1
+            selector:
+              matchLabels:
+                app: hello-world
+            template:
+              metadata:
+                labels:
+                  app: hello-world
+              spec:
+                containers:
+                  - name: hello-world
+                    image: hello-world
+                    ports:
+                      - name: http
+                        containerPort: 8080
