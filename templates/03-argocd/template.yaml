@@ -77,8 +77,8 @@ spec:
         name: ${{ parameters.serviceName }}
         namespace: ${{ parameters.serviceName }}
         chart:
-          name: ${{ (parameters.repoUrl | parseRepoUrl).repo }}
-          repo: ghcr.io/${{ (parameters.repoUrl | parseRepoUrl).owner }}-chart
+          repo: ghcr.io/${{ (parameters.repoUrl | parseRepoUrl).owner }}
+          name: ${{ (parameters.repoUrl | parseRepoUrl).repo }}-chart
           version: 9.9.9
 
     - id: register
