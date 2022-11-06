@@ -1,10 +1,10 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: hello-world
-  title: Hello World
+  name: hello-world-on-kubernetes
+  title: Hello World on Kubernetes
 spec:
-  owner: muvaf/kubecon-na-2022
+  owner: muvaf/cloud-native-heroku
   type: service
 
   parameters:
